@@ -1,0 +1,6 @@
+{
+  "editor.indentSize": "tabSize",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
+}

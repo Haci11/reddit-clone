@@ -1,6 +1,7 @@
 import styles from "../styles/Home.module.scss";
 import Header from "../components/header/Header";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Content from "../components/content/Content";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -8,9 +9,7 @@ export default function Home() {
   return (
     <>
       <div className={styles.container}>
-        <Header />
-        <h1>Welcome {session?.user?.name}</h1>
-        <button onClick={() => signOut()}>Sign out</button>
+        <Content />
       </div>
     </>
   );

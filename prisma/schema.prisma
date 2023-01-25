@@ -64,12 +64,24 @@ model VerificationToken {
 }
 
 model Post {
+  id          String    @id @default(cuid())
+  authorId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  title       String
+  body        String
+  author      User      @relation(fields: [authorId], references: [id])
+  subredditId String
+  subreddit   SubReddit @relation(fields: [subredditId], references: [id])
+
+  @@index([subredditId])
+  @@index([authorId])
+}
+
+model SubReddit {
   id        String   @id @default(cuid())
-  authorId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
-  text      String
-  author    User     @relation(fields: [authorId], references: [id])
-
-  @@index([authorId])
+  title     String
+  posts     Post[]
 }

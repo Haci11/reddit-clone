@@ -1,7 +1,17 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import styles from "./Header.module.scss";
+
+interface Session {
+  user: {
+    name: string;
+    image: string;
+    email: string;
+  };
+}
 const Header = () => {
-  const { data: session } = useSession();
+  const { data: session }: { data: Session } = useSession() as {
+    data: Session;
+  };
 
   if (!session)
     return (
@@ -40,5 +50,4 @@ const Header = () => {
     </nav>
   );
 };
-
 export default Header;

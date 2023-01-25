@@ -7,7 +7,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const resp = await prisma.post.findMany();
-
+  const resp = await prisma.subReddit.findMany();
   res.status(200).json(resp);
 }

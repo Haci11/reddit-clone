@@ -18,6 +18,7 @@ const Content: React.FC = () => {
       console.log(data);
       setData(data);
     }
+
     fetchData();
     setLoading(!data);
   }, []);
@@ -25,11 +26,13 @@ const Content: React.FC = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  console.log(data);
+
   return (
     <div>
       <div>
         {data?.map((item) => (
-          <Link key={item.id} href="/[name]" as={`/${item.id}`}>
+          <Link key={item.id} href="/[id]" as={`/${item.id}`}>
             <p>{item.title}</p>
           </Link>
         ))}

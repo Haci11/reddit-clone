@@ -1,0 +1,17 @@
+@import "/src/styles/globals.scss";
+
+.card {
+  margin-top: 20px;
+  padding: 15px 30px;
+  background-color: $gray;
+  text-align: center;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-radius: 5px;
+
+  &s {
+    color: $white;
+  }
+}

@@ -1,13 +1,25 @@
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styles from "../styles/Home.module.scss";
 
+interface Session {
+  user: {
+    name: string;
+    image: string;
+    email: string;
+  };
+}
 interface MyDataType {
   id: string;
-  text: string;
+  posts: [{ title: string; body: string; id: string }];
 }
 
 const Id = () => {
+  const { data: session }: { data: Session } = useSession() as {
+    data: Session;
+  };
   const router = useRouter();
   const { id } = router.query;
   const [isLoading, setLoading] = useState(true);
@@ -15,8 +27,11 @@ const Id = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+      const response = await fetch(
+        `http://localhost:3000/api/subreddits/${id}`
+      );
       const data = await response.json();
+      console.log(data);
       setData(data);
       setLoading(false);
     }
@@ -34,7 +49,19 @@ const Id = () => {
 
   return (
     <div className={styles.container}>
-      <h1>{data.text}</h1>
+      {data.posts.map((post) => (
+        <Link key={post.id} href="/[id]/[postId]" as={`/${id}/${post.id}`}>
+          <h1>{post.title}</h1>
+          <p>{post.body}</p>
+        </Link>
+      ))}
+
+      {session && (
+        <div>
+          <input type="text" />
+          <button>Create a post</button>
+        </div>
+      )}
     </div>
   );
 };

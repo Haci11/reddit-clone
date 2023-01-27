@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Link from "next/link";
-
+import styles from "./Content.module.scss";
 interface MyDataType {
   id: string;
   title: string;
@@ -13,9 +12,8 @@ const Content: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:3000/api/posts");
+      const response = await fetch("http://localhost:3000/api/subreddits");
       const data = await response.json();
-      console.log(data);
       setData(data);
     }
 
@@ -26,13 +24,16 @@ const Content: React.FC = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  console.log(data);
 
   return (
     <div>
-      <div>
+      <div className={styles.card}>
         {data?.map((item) => (
-          <Link key={item.id} href="/[id]" as={`/${item.id}`}>
+          <Link
+            key={item.id}
+            href="/[id]"
+            as={`/${item.id}`}
+            className={styles.cards}>
             <p>{item.title}</p>
           </Link>
         ))}

@@ -12,7 +12,8 @@ export default async function handler(
   const schema = z.object({
     title: z.string(),
     body: z.string(),
-    subredditId: z.string().ref("subredditId"),
+    subredditId: z.string(),
+    authorId: z.string(),
   });
   if (!schema.safeParse(req.body).success) {
     return res.status(400).json({ message: "Invalid" });

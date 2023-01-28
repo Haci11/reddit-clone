@@ -24,6 +24,22 @@ const Id = () => {
   const { id } = router.query;
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<MyDataType | null>(null);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const createPost = async () => {
+    const res = await fetch(
+      `http://localhost:3000/api/subreddits/${id}/posts`,
+      {
+        method: "POST",
+        body: JSON.stringify({ title, body, subredditId: id }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log(res);
+
+    const data = await res.json();
+    console.log(data);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -58,8 +74,19 @@ const Id = () => {
 
       {session && (
         <div>
-          <input type="text" />
-          <button>Create a post</button>
+          <label htmlFor="">title</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <label htmlFor="">text</label>
+          <input
+            type="text"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+          />
+          <button onClick={() => createPost()}>Create a post</button>
         </div>
       )}
     </div>

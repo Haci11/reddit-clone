@@ -27,14 +27,11 @@ const Id = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const createPost = async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/subreddits/${id}/posts`,
-      {
-        method: "POST",
-        body: JSON.stringify({ title, body, subredditId: id }),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    const res = await fetch(`http://localhost:3000/api/subreddits/${id}/post`, {
+      method: "POST",
+      body: JSON.stringify({ title, body, subredditId: id }),
+      headers: { "Content-Type": "application/json" },
+    });
     console.log(res);
 
     const data = await res.json();
@@ -47,7 +44,6 @@ const Id = () => {
         `http://localhost:3000/api/subreddits/${id}`
       );
       const data = await response.json();
-      console.log(data);
       setData(data);
       setLoading(false);
     }

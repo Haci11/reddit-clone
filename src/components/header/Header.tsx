@@ -1,13 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import { Session } from "../../types/Interfaces";
 import styles from "./Header.module.scss";
 
-interface Session {
-  user: {
-    name: string;
-    image: string;
-    email: string;
-  };
-}
 const Header = () => {
   const { data: session }: { data: Session } = useSession() as {
     data: Session;

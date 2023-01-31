@@ -1,0 +1,48 @@
+@import "/src/styles/globals.scss";
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+  &s {
+    color: $white;
+  }
+}
+
+.sidebar {
+  padding: 10px 20px;
+  background-color: $gray;
+  width: 100%;
+  max-width: 280px;
+  height: 100%;
+
+  @media only screen and (max-width: 650px) {
+    display: none;
+  }
+
+  .title {
+    color: $white;
+    margin-bottom: 2rem;
+  }
+}
+
+.form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+
+  input {
+    padding: 5px;
+    outline: 0;
+    border: 1px solid #000;
+    border-radius: 5px;
+  }
+
+  button {
+    padding: 5px;
+    border-radius: 999px;
+    border: 1px solid #000;
+  }
+}

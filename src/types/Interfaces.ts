@@ -8,5 +8,6 @@ export interface Session {
 
 export interface MyDataType {
   id: string;
+  title: string;
   posts: [{ title: string; body: string; id: string }];
 }

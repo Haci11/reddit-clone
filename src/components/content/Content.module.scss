@@ -1,17 +1,24 @@
 @import "/src/styles/globals.scss";
 
+.container {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+}
+
 .card {
-  margin-top: 20px;
+  overflow: auto;
   padding: 15px 30px;
   background-color: $gray;
   text-align: center;
-  min-width: 280px;
+  width: 80%;
   display: flex;
   flex-direction: column;
   gap: 30px;
   border-radius: 5px;
-
-  &s {
+  margin-top: 2rem;
+  p {
     color: $white;
   }
 }

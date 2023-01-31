@@ -1,6 +1,7 @@
 @import "/src/styles/globals.scss";
 
 .nav {
+  border-bottom: 1px solid $black;
   background-color: $gray;
   display: flex;
   align-items: center;

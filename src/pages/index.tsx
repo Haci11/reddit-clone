@@ -32,7 +32,7 @@ export default function Home() {
         <Content />
 
         {session && (
-          <div>
+          <div className={styles.form}>
             <input
               type="text"
               value={title}

@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import Posts from "../components/posts/Posts";
 import styles from "../styles/Home.module.scss";
 
 interface Session {
@@ -35,18 +36,17 @@ const Id = () => {
     console.log(res);
 
     const data = await res.json();
+    fetchData();
     console.log(data);
   };
 
+  async function fetchData() {
+    const response = await fetch(`http://localhost:3000/api/subreddits/${id}`);
+    const data = await response.json();
+    setData(data);
+    setLoading(false);
+  }
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(
-        `http://localhost:3000/api/subreddits/${id}`
-      );
-      const data = await response.json();
-      setData(data);
-      setLoading(false);
-    }
     fetchData();
     setLoading(!data);
   }, [id]);
@@ -61,15 +61,22 @@ const Id = () => {
 
   return (
     <div className={styles.container}>
-      {data.posts.map((post) => (
-        <Link key={post.id} href="/[id]/[postId]" as={`/${id}/${post.id}`}>
-          <h1>{post.title}</h1>
-          <p>{post.body}</p>
-        </Link>
-      ))}
+      <Posts />
+      <div className={styles.card}>
+        {data.posts.map((post) => (
+          <Link
+            key={post.id}
+            href="/[id]/[postId]"
+            as={`/${id}/${post.id}`}
+            className={styles.cards}>
+            <h1>{post.title}</h1>
+            <p>{post.body}</p>
+          </Link>
+        ))}
+      </div>
 
       {session && (
-        <div>
+        <div className={styles.form}>
           <label htmlFor="">title</label>
           <input
             type="text"

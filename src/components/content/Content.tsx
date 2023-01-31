@@ -10,13 +10,12 @@ const Content: React.FC = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<MyDataType[]>([]);
 
+  async function fetchData() {
+    const response = await fetch("http://localhost:3000/api/subreddits");
+    const data = await response.json();
+    setData(data);
+  }
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("http://localhost:3000/api/subreddits");
-      const data = await response.json();
-      setData(data);
-    }
-
     fetchData();
     setLoading(!data);
   }, []);

@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./Content.module.scss";
-interface MyDataType {
-  id: string;
-  title: string;
-}
+import { useQuery } from "@tanstack/react-query";
+import type { MyDataType } from "../../types/Interfaces";
 
 const Content: React.FC = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState<MyDataType[]>([]);
-
-  async function fetchData() {
-    const response = await fetch("http://localhost:3000/api/subreddits");
-    const data = await response.json();
-    setData(data);
-  }
-  useEffect(() => {
-    fetchData();
-    setLoading(!data);
-  }, []);
+  const { data, isLoading } = useQuery<MyDataType[]>({
+    queryKey: ["subreddits"],
+    queryFn: async () => {
+      const response = await fetch("http://localhost:3000/api/subreddits");
+      const data = await response.json();
+      return data;
+    },
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;

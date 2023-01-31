@@ -1,21 +1,11 @@
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Posts from "../components/posts/Posts";
 import styles from "../styles/Home.module.scss";
-
-interface Session {
-  user: {
-    name: string;
-    image: string;
-    email: string;
-  };
-}
-interface MyDataType {
-  id: string;
-  posts: [{ title: string; body: string; id: string }];
-}
+import type { Session, MyDataType } from "../types/Interfaces";
 
 const Id = () => {
   const { data: session }: { data: Session } = useSession() as {
@@ -23,33 +13,37 @@ const Id = () => {
   };
   const router = useRouter();
   const { id } = router.query;
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState<MyDataType | null>(null);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const queryClient = useQueryClient();
+
   const createPost = async () => {
     const res = await fetch(`http://localhost:3000/api/subreddits/${id}/post`, {
       method: "POST",
       body: JSON.stringify({ title, body, subredditId: id }),
       headers: { "Content-Type": "application/json" },
     });
-    console.log(res);
-
     const data = await res.json();
-    fetchData();
     console.log(data);
   };
+  const mutation = useMutation({
+    mutationFn: createPost,
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
 
-  async function fetchData() {
-    const response = await fetch(`http://localhost:3000/api/subreddits/${id}`);
-    const data = await response.json();
-    setData(data);
-    setLoading(false);
-  }
-  useEffect(() => {
-    fetchData();
-    setLoading(!data);
-  }, [id]);
+  const { data, isLoading } = useQuery<MyDataType>({
+    queryKey: ["posts"],
+    queryFn: async () => {
+      const response = await fetch(
+        `http://localhost:3000/api/subreddits/${id}`
+      );
+      const data = await response.json();
+      return data;
+    },
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -63,7 +57,7 @@ const Id = () => {
     <div className={styles.container}>
       <Posts />
       <div className={styles.card}>
-        {data.posts.map((post) => (
+        {data?.posts?.map((post) => (
           <Link
             key={post.id}
             href="/[id]/[postId]"
@@ -89,7 +83,7 @@ const Id = () => {
             value={body}
             onChange={(e) => setBody(e.target.value)}
           />
-          <button onClick={() => createPost()}>Create a post</button>
+          <button onClick={() => mutation.mutate()}>Create a post</button>
         </div>
       )}
     </div>

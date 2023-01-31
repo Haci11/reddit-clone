@@ -2,21 +2,15 @@ import styles from "../styles/Home.module.scss";
 import Content from "../components/content/Content";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-
-interface Session {
-  user: {
-    name: string;
-    image: string;
-    email: string;
-  };
-}
+import type { Session } from "../types/Interfaces";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const { data: session }: { data: Session } = useSession() as {
     data: Session;
   };
   const [title, setTitle] = useState("");
-
+  const router = useRouter();
   const createSubReddit = async () => {
     const res = await fetch("http://localhost:3000/api/subreddits", {
       method: "POST",
@@ -24,6 +18,7 @@ export default function Home() {
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
+    router.replace("/" + data.id);
     console.log(data);
   };
   return (

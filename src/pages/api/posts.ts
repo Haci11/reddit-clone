@@ -11,6 +11,7 @@ export default async function handler(
   const posts = await prisma.post.findMany({
     include: {
       subreddit: true,
+      author: true,
     },
   });
 

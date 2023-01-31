@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { MyDataType } from "../../types/Interfaces";
+import { Post } from "../../types/Interfaces";
 import styles from "./Content.module.scss";
 
 const Content: React.FC = () => {
-  const { data, isLoading } = useQuery<MyDataType[]>({
+  const { data, isLoading } = useQuery<Post[]>({
     queryKey: ["allposts"],
     queryFn: async () => {
       const response = await fetch("http://localhost:3000/api/posts");
@@ -25,7 +25,16 @@ const Content: React.FC = () => {
         {data?.map((data) => {
           return (
             <Link href="/" className={styles.cards}>
-              {data.title} <div>{data.body}</div>
+              <Link href={`/${data.subreddit.id}`}>
+                <div className={styles.header}>
+                  <span> {data.subreddit.title} </span>.
+                  <p>Posted by {data.author.name}</p>
+                </div>
+                <div className={styles.body}>
+                  <h3>{data.title}</h3>
+                  <p>{data.body}</p>
+                </div>
+              </Link>
             </Link>
           );
         })}

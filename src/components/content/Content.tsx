@@ -25,7 +25,9 @@ const Content: React.FC = () => {
         {data?.map((data) => {
           return (
             <Link href="/" className={styles.cards}>
-              <Link href={`/${data.subreddit.id}`}>
+              <Link
+                href="/[id]/[postId]"
+                as={`/${data.subreddit.id}/${data.id}`}>
                 <div className={styles.header}>
                   <span> {data.subreddit.title} </span>.
                   <p>Posted by {data.author.name}</p>

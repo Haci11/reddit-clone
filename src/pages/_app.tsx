@@ -12,15 +12,14 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider session={pageProps.session}>
-        <Header />
-        <main className="App">
-          <div className="wrap">
-            <div className="box">
-              <Sidebar />
-              <Component {...pageProps} />
-            </div>
-          </div>
-        </main>
+        <div className="App">
+          <Header />
+
+          <main className="main">
+            <Sidebar />
+            <Component {...pageProps} />
+          </main>
+        </div>
       </SessionProvider>
     </QueryClientProvider>
   );

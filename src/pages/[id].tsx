@@ -35,7 +35,7 @@ const Id = () => {
   });
 
   const { data, isLoading } = useQuery<MyDataType>({
-    queryKey: ["posts"],
+    queryKey: ["posts", id],
     queryFn: async () => {
       const response = await fetch(
         `http://localhost:3000/api/subreddits/${id}`

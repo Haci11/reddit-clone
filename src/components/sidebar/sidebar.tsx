@@ -38,32 +38,34 @@ const sidebar = () => {
   }
 
   return (
-    <div className={styles.sidebar}>
-      <div>
-        <h1 className={styles.title}>SubReddits</h1>
-        <div className={styles.card}>
-          {data?.map((subreddits) => (
-            <Link
-              key={subreddits.id}
-              href="/[id]"
-              as={`/${subreddits.id}`}
-              className={styles.cards}>
-              <p>{subreddits.title}</p>
-            </Link>
-          ))}
-        </div>
-        {session && (
-          <div className={styles.form}>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <button onClick={() => createSubReddit()}>
-              Create a subreddit
-            </button>
+    <div className={styles.sidebar_container}>
+      <div className={styles.sidebar}>
+        <div>
+          <h1 className={styles.title}>SubReddits</h1>
+          {session && (
+            <div className={styles.form}>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <button onClick={() => createSubReddit()}>
+                Create a subreddit
+              </button>
+            </div>
+          )}
+          <div className={styles.card}>
+            {data?.map((subreddits) => (
+              <Link
+                key={subreddits.id}
+                href="/[id]"
+                as={`/${subreddits.id}`}
+                className={styles.cards}>
+                <p>{subreddits.title}</p>
+              </Link>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

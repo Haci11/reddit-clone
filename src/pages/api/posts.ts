@@ -13,6 +13,9 @@ export default async function handler(
       subreddit: true,
       author: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   res.status(200).json(posts);

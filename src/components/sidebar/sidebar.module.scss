@@ -12,6 +12,9 @@
   background-color: $gray;
   max-width: 280px;
   width: 100%;
+  @media only screen and (max-width: 650px) {
+    display: none;
+  }
 }
 .sidebar {
   padding: 10px 20px;

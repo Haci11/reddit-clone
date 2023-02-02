@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { Post } from "../../types/Interfaces";
+import { formatTimeAgo } from "../utils/formatTimeAgo";
 import styles from "./Content.module.scss";
 
 const Content: React.FC = () => {
@@ -31,6 +32,7 @@ const Content: React.FC = () => {
                 <div className={styles.header}>
                   <span> {data.subreddit.title} </span>.
                   <p>Posted by {data.author.name}</p>
+                  <p> {formatTimeAgo(data.createdAt)}</p>
                 </div>
                 <div className={styles.body}>
                   <h3>{data.title}</h3>

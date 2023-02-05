@@ -25,7 +25,7 @@ const Content: React.FC = () => {
       <div className={styles.card}>
         {data?.map((data) => {
           return (
-            <Link href="/" className={styles.cards}>
+            <div className={styles.cards}>
               <Link
                 href="/[id]/[postId]"
                 as={`/${data.subreddit.id}/${data.id}`}>
@@ -39,7 +39,7 @@ const Content: React.FC = () => {
                   <p>{data.body}</p>
                 </div>
               </Link>
-            </Link>
+            </div>
           );
         })}
       </div>

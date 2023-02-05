@@ -1,0 +1,58 @@
+@import "/src/styles/globals.scss";
+
+.container {
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px;
+}
+
+.card {
+  overflow: auto;
+  padding: 15px 30px;
+  background-color: $gray;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-radius: 5px;
+  color: $white;
+
+  &s {
+    display: flex;
+    padding: 15px;
+    gap: 30px;
+    flex-direction: column;
+    margin: 2px;
+    background-color: #0000034c;
+    border-radius: 8px;
+    word-break: break-all;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $white;
+    span {
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+    p {
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+  }
+  .body {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    h3 {
+      color: $white;
+      font-weight: bold;
+    }
+    p {
+      color: $white;
+      opacity: 0.6;
+    }
+  }
+}

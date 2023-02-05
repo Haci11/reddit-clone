@@ -11,6 +11,12 @@ export default async function handler(
   if (!postId || Array.isArray(postId)) {
     return res.status(404).json({ message: "gg kid" });
   }
-  const posts = await prisma.post.findUnique({ where: { id: postId } });
+  const posts = await prisma.post.findUnique({
+    where: { id: postId },
+    include: {
+      subreddit: true,
+      author: true,
+    },
+  });
   res.status(200).json(posts);
 }

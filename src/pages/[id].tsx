@@ -55,7 +55,6 @@ const Id = () => {
 
   return (
     <div className={styles.container}>
-      <Posts />
       <div className={styles.card}>
         {data?.posts?.map((post) => (
           <Link

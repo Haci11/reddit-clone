@@ -29,10 +29,9 @@ const Post = () => {
   if (!data) {
     return <div>erro...</div>;
   }
-  console.log(data);
   return (
     <div className={styles.container}>
-      <Posts Post={data} />
+      <Posts posts={data} />
     </div>
   );
 };

@@ -17,7 +17,11 @@ export default async function handler(
       id: subredditId,
     },
     include: {
-      posts: true,
+      posts: {
+        include: {
+          author: true,
+        },
+      },
     },
   });
 

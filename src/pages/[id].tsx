@@ -3,7 +3,6 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Posts from "../components/posts/Posts";
 import styles from "../styles/Home.module.scss";
 import type { Session, MyDataType } from "../types/Interfaces";
 

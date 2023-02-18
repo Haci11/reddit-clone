@@ -2,9 +2,10 @@ import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { formatTimeAgo } from "../components/utils/formatTimeAgo";
 import styles from "../styles/Home.module.scss";
-import type { Session, MyDataType } from "../types/Interfaces";
+import type { Session, Subreddit } from "../types/Interfaces";
 
 const Id = () => {
   const { data: session }: { data: Session } = useSession() as {
@@ -33,7 +34,7 @@ const Id = () => {
     },
   });
 
-  const { data, isLoading } = useQuery<MyDataType>({
+  const { data, isLoading } = useQuery<Subreddit>({
     queryKey: ["posts", id],
     queryFn: async () => {
       const response = await fetch(
@@ -43,10 +44,12 @@ const Id = () => {
       return data;
     },
   });
+  console.log(data);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  console.log();
 
   if (!data) {
     return <div>erro...</div>;
@@ -54,17 +57,26 @@ const Id = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
-        {data?.posts?.map((post) => (
-          <Link
-            key={post.id}
-            href="/[id]/[postId]"
-            as={`/${id}/${post.id}`}
-            className={styles.cards}>
-            <h1>{post.title}</h1>
-            <p>{post.body}</p>
-          </Link>
-        ))}
+      <div className={styles.bob}>
+        <div className={styles.card}>
+          {data?.posts.map((data) => {
+            return (
+              <div className={styles.cards}>
+                <Link href="/[id]/[postId]" as={`/${data.id}/${data.id}`}>
+                  <div className={styles.header}>
+                    <span> {data.title} </span>.
+                    <p>Posted by {data.author.name}</p>
+                    <p> {formatTimeAgo(data.createdAt)}</p>
+                  </div>
+                  <div className={styles.body}>
+                    <h3>{data.title}</h3>
+                    <p>{data.body}</p>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {session && (

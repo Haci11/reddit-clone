@@ -30,6 +30,7 @@ export interface Subreddit {
   createdAt: string;
   updatedAt: string;
   title: string;
+  posts: Post[];
 }
 
 export interface Author {

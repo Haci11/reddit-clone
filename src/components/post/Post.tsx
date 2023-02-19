@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { Post, Session } from "../../types/Interfaces";
 import styles from "./Post.module.scss";
 import { formatTimeAgo } from "../utils/formatTimeAgo";
 import { useSession } from "next-auth/react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface PostsProps {
   posts: Post;
 }
 
 const Posts = ({ posts }: PostsProps) => {
+  const [content, setContent] = useState("");
+  const queryClient = useQueryClient();
+
+  const createComment = async () => {
+    const res = await fetch(`http://localhost:3000/api/comment`, {
+      method: "POST",
+      body: JSON.stringify({ content, postId: posts.id }),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (res.ok) {
+      setContent("");
+    } else {
+      alert("Error creating comment");
+    }
+    const data = await res.json();
+    console.log(data);
+  };
+
+  const mutation = useMutation({
+    mutationFn: createComment,
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["comment"] });
+    },
+  });
+
   const { data: session }: { data: Session } = useSession() as {
     data: Session;
   };
+
   return (
     <div className={styles.container} key={posts.id}>
       <div className={styles.card}>
@@ -28,7 +56,19 @@ const Posts = ({ posts }: PostsProps) => {
         </div>
         <div className={styles.comment_comtainer}>
           <div className={styles.comments}>
-            {session && <p>Send Comment as {session.user.name}</p>}
+            {session && (
+              <div className={styles.comment_form}>
+                <p>Send Comment as {session.user.name}</p>
+                <textarea
+                  name="content"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  placeholder="What are your thoughts?"
+                  id="content"></textarea>
+                <input type="submit" onClick={() => mutation.mutate()} />
+              </div>
+            )}
+
             {posts.Comment.length === 0
               ? "There is no comment"
               : posts.Comment.map((comment) => {

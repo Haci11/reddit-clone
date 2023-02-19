@@ -9,10 +9,8 @@ const Post = () => {
   const router = useRouter();
   const { id, postId } = router.query;
 
-  console.log(id, postId);
-
   const { data, isLoading } = useQuery<Post>({
-    queryKey: ["posts", id, postId],
+    queryKey: ["comment", id, postId],
     queryFn: async () => {
       const response = await fetch(
         `http://localhost:3000/api/subreddits/${id}/${postId}`
@@ -21,8 +19,6 @@ const Post = () => {
       return data;
     },
   });
-
-  console.log(data);
 
   if (isLoading) {
     return <div>Loading...</div>;

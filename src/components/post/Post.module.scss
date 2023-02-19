@@ -18,6 +18,12 @@
       height: 50px;
     }
   }
+  .comment_form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
   .comment_body {
     margin-left: 4rem;
     display: flex;

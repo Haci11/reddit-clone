@@ -23,8 +23,17 @@ export interface Post {
   subredditId: string;
   subreddit: Subreddit;
   author: Author;
+  Comment: Comment[];
 }
 
+export interface Comment {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  content: string;
+  postId: string;
+  userId: string;
+}
 export interface Subreddit {
   id: string;
   createdAt: string;

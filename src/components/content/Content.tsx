@@ -38,6 +38,9 @@ const Content: React.FC = () => {
                   <h3>{data.title}</h3>
                   <p>{data.body}</p>
                 </div>
+                <div className={styles.comment}>
+                  {data.Comment.length} Comments
+                </div>
               </Link>
             </div>
           );

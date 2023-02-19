@@ -16,6 +16,7 @@ export default async function handler(
     include: {
       subreddit: true,
       author: true,
+      Comment: true,
     },
   });
   res.status(200).json(posts);

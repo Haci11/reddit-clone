@@ -3,8 +3,6 @@
 .container {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 .containers {
   padding: 20px;
@@ -47,10 +45,12 @@
   border-radius: 5px;
   color: $white;
 
+  .comment {
+    margin-top: 1rem;
+    color: $white;
+  }
   &s {
-    display: flex;
     padding: 15px;
-    gap: 30px;
     margin: 2px;
     background-color: #0000034c;
     border-radius: 8px;

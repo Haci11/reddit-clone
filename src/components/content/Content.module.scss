@@ -17,13 +17,16 @@
   color: $white;
 
   &s {
-    display: flex;
     padding: 15px;
-    gap: 30px;
     margin: 2px;
     background-color: #0000034c;
     border-radius: 8px;
     word-break: break-all;
+
+    .comment {
+      margin-top: 1rem;
+      color: $white;
+    }
   }
   .header {
     display: flex;

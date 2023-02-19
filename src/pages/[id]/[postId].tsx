@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Posts from "../../components/posts/Posts";
+import Posts from "../../components/post/Post";
 import { Post } from "../../types/Interfaces";
 import styles from "../../styles/Home.module.scss";
 
@@ -21,6 +21,8 @@ const Post = () => {
       return data;
     },
   });
+
+  console.log(data);
 
   if (isLoading) {
     return <div>Loading...</div>;

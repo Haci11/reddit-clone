@@ -20,6 +20,7 @@ export default async function handler(
       posts: {
         include: {
           author: true,
+          Comment: true,
         },
       },
     },

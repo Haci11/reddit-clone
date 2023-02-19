@@ -56,26 +56,34 @@ const Id = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.bob}>
+    <div className={styles.containers}>
+      <div className={styles.container}>
         <div className={styles.card}>
-          {data?.posts.map((data) => {
-            return (
-              <div className={styles.cards}>
-                <Link href="/[id]/[postId]" as={`/${data.id}/${data.id}`}>
-                  <div className={styles.header}>
-                    <span> {data.title} </span>.
-                    <p>Posted by {data.author.name}</p>
-                    <p> {formatTimeAgo(data.createdAt)}</p>
-                  </div>
-                  <div className={styles.body}>
-                    <h3>{data.title}</h3>
-                    <p>{data.body}</p>
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
+          {data.posts.length === 0 ? (
+            <div>
+              <p>There is no posts</p>
+              <br />
+              <p>Be the first one to post in this subreddit</p>
+            </div>
+          ) : (
+            data?.posts.map((data) => {
+              return (
+                <div className={styles.cards}>
+                  <Link href="/[id]/[postId]" as={`/${data.id}/${data.id}`}>
+                    <div className={styles.header}>
+                      <span> {data.title} </span>.
+                      <p>Posted by {data.author.name}</p>
+                      <p> {formatTimeAgo(data.createdAt)}</p>
+                    </div>
+                    <div className={styles.body}>
+                      <h3>{data.title}</h3>
+                      <p>{data.body}</p>
+                    </div>
+                  </Link>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
 

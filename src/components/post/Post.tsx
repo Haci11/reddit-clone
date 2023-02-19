@@ -39,7 +39,7 @@ const Posts = ({ posts }: PostsProps) => {
                         <p>{posts.author.name}</p>
                         <p>{formatTimeAgo(comment.createdAt)}</p>
                       </div>
-                      <div>
+                      <div className={styles.comment_body}>
                         <p>{comment.content}</p>
                       </div>
                     </div>

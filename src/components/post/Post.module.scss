@@ -7,6 +7,25 @@
   max-width: 700px;
 }
 
+.comment_comtainer {
+  .comment_head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .comment_body {
+    margin-left: 4rem;
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+}
+
 .card {
   overflow: auto;
   padding: 15px 30px;

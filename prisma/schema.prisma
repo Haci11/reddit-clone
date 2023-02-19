@@ -53,6 +53,7 @@ model User {
   accounts Account[]
   sessions Session[]
   posts    Post[]
+  Comment  Comment[]
 }
 
 model VerificationToken {
@@ -73,6 +74,7 @@ model Post {
   author      User      @relation(fields: [authorId], references: [id])
   subredditId String
   subreddit   SubReddit @relation(fields: [subredditId], references: [id])
+  Comment     Comment[]
 
   @@index([subredditId])
   @@index([authorId])
@@ -84,4 +86,20 @@ model SubReddit {
   updatedAt DateTime @default(now()) @updatedAt
   title     String
   posts     Post[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  content   String
+
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@index([postId])
+  @@index([userId])
 }

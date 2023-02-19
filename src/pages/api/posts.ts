@@ -12,6 +12,7 @@ export default async function handler(
     include: {
       subreddit: true,
       author: true,
+      Comment: true,
     },
     orderBy: {
       createdAt: "desc",

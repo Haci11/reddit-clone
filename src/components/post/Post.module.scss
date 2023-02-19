@@ -23,6 +23,21 @@
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 1rem;
+
+    textarea {
+      height: 150px;
+      width: 100%;
+      outline: none;
+      padding: 12px 20px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    input {
+      padding: 10px 20px;
+      border-radius: 8px;
+      outline: none;
+      border: 0;
+    }
   }
   .comment_body {
     margin-left: 4rem;

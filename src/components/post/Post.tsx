@@ -14,7 +14,7 @@ const Posts = ({ posts }: PostsProps) => {
   const queryClient = useQueryClient();
 
   const createComment = async () => {
-    const res = await fetch(`http://localhost:3000/api/comment`, {
+    const res = await fetch(`/api/comment`, {
       method: "POST",
       body: JSON.stringify({ content, postId: posts.id }),
       headers: { "Content-Type": "application/json" },
@@ -54,7 +54,7 @@ const Posts = ({ posts }: PostsProps) => {
             <p>{posts.body}</p>
           </div>
         </div>
-        <div className={styles.comment_comtainer}>
+        <div className={styles.comment_container}>
           <div className={styles.comments}>
             {session && (
               <div className={styles.comment_form}>
@@ -68,23 +68,24 @@ const Posts = ({ posts }: PostsProps) => {
                 <input type="submit" onClick={() => mutation.mutate()} />
               </div>
             )}
-
-            {posts.Comment.length === 0
-              ? "There is no comment"
-              : posts.Comment.map((comment) => {
-                  return (
-                    <div>
-                      <div key={comment.id} className={styles.comment_head}>
-                        <img src={posts.author.image} alt="Profile" />
-                        <p>{posts.author.name}</p>
-                        <p>{formatTimeAgo(comment.createdAt)}</p>
+            <div className={styles.comment_reverse}>
+              {posts.Comment.length === 0
+                ? "There is no comment"
+                : posts.Comment.map((comment) => {
+                    return (
+                      <div key={comment.id}>
+                        <div key={comment.id} className={styles.comment_head}>
+                          <img src={posts.author.image} alt="Profile" />
+                          <p>{posts.author.name}</p>
+                          <p>{formatTimeAgo(comment.createdAt)}</p>
+                        </div>
+                        <div className={styles.comment_body}>
+                          <p>{comment.content}</p>
+                        </div>
                       </div>
-                      <div className={styles.comment_body}>
-                        <p>{comment.content}</p>
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+            </div>
           </div>
         </div>
       </div>

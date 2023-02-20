@@ -8,9 +8,8 @@ const Content: React.FC = () => {
   const { data, isLoading } = useQuery<Post[]>({
     queryKey: ["allposts"],
     queryFn: async () => {
-      const response = await fetch("http://localhost:3000/api/posts");
+      const response = await fetch("/api/posts");
       const data = await response.json();
-      console.log(data);
       return data;
     },
   });
@@ -18,14 +17,13 @@ const Content: React.FC = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  console.log(data);
 
   return (
     <div className={styles.container}>
       <div className={styles.card}>
         {data?.map((data) => {
           return (
-            <div className={styles.cards}>
+            <div className={styles.cards} key={data.id}>
               <Link
                 href="/[id]/[postId]"
                 as={`/${data.subreddit.id}/${data.id}`}>

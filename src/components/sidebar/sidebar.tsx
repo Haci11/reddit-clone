@@ -14,7 +14,7 @@ const sidebar = () => {
 
   const router = useRouter();
   const createSubReddit = async () => {
-    const res = await fetch("http://localhost:3000/api/subreddits", {
+    const res = await fetch("/api/subreddits", {
       method: "POST",
       body: JSON.stringify({ title }),
       headers: { "Content-Type": "application/json" },
@@ -27,7 +27,7 @@ const sidebar = () => {
   const { data, isLoading } = useQuery<MyDataType[]>({
     queryKey: ["subreddits"],
     queryFn: async () => {
-      const response = await fetch("http://localhost:3000/api/subreddits");
+      const response = await fetch("/api/subreddits");
       const data = await response.json();
       return data;
     },

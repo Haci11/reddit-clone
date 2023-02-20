@@ -3,10 +3,8 @@ import Content from "../components/Content/Content";
 
 export default function Home() {
   return (
-    <>
-      <div className={styles.container}>
-        <Content />
-      </div>
-    </>
+    <div className={styles.container}>
+      <Content />
+    </div>
   );
 }

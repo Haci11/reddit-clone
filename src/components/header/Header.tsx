@@ -31,12 +31,9 @@ const Header = () => {
         <h1 className={styles.github__name}> {session?.user.name}</h1>
         <div className={styles.dropdown}>
           <button className={styles.dropbtn}>
-            Dropdown
-            <i className="fa fa-caret-down"></i>
+            Meny <i className="fa fa-caret-down"></i>
           </button>
           <div className={styles.dropdown_content}>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
             <a onClick={() => signOut()}>Log Out</a>
           </div>
         </div>

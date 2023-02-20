@@ -12,9 +12,7 @@ const Post = () => {
   const { data, isLoading } = useQuery<Post>({
     queryKey: ["comment", id, postId],
     queryFn: async () => {
-      const response = await fetch(
-        `http://localhost:3000/api/subreddits/${id}/${postId}`
-      );
+      const response = await fetch(`/api/subreddits/${id}/${postId}`);
       const data = await response.json();
       return data;
     },

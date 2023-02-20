@@ -7,7 +7,11 @@
   max-width: 700px;
 }
 
-.comment_comtainer {
+.comment_container {
+  .comment_reverse {
+    display: flex;
+    flex-direction: column-reverse;
+  }
   .comment_head {
     display: flex;
     align-items: center;
@@ -39,11 +43,18 @@
       border: 0;
     }
   }
+
   .comment_body {
     margin-left: 4rem;
-    display: flex;
     margin-top: 1rem;
     margin-bottom: 3rem;
+    @media screen and (max-width: 555px) {
+      margin-left: 0;
+      p {
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 }
 

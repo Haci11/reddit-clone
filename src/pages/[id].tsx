@@ -37,9 +37,7 @@ const Id = () => {
   const { data, isLoading } = useQuery<Subreddit>({
     queryKey: ["posts", id],
     queryFn: async () => {
-      const response = await fetch(
-        `http://localhost:3000/api/subreddits/${id}`
-      );
+      const response = await fetch(`/api/subreddits/${id}`);
       const data = await response.json();
       return data;
     },
@@ -65,21 +63,21 @@ const Id = () => {
               <p>Be the first one to post in this subreddit</p>
             </div>
           ) : (
-            data?.posts.map((data) => {
+            data?.posts.map((post) => {
               return (
-                <div className={styles.cards}>
-                  <Link href="/[id]/[postId]" as={`/${data.id}/${data.id}`}>
+                <div className={styles.cards} key={post.id}>
+                  <Link href="/[id]/[postId]" as={`/${data.id}/${post.id}`}>
                     <div className={styles.header}>
-                      <span> {data.title} </span>.
-                      <p>Posted by {data.author.name}</p>
-                      <p> {formatTimeAgo(data.createdAt)}</p>
+                      <span> {post.title} </span>.
+                      <p>Posted by {post.author.name}</p>
+                      <p> {formatTimeAgo(post.createdAt)}</p>
                     </div>
                     <div className={styles.body}>
-                      <h3>{data.title}</h3>
-                      <p>{data.body}</p>
+                      <h3>{post.title}</h3>
+                      <p>{post.body}</p>
                     </div>
                     <div className={styles.comment}>
-                      {data.Comment.length} Comments
+                      {post.Comment.length} Comments
                     </div>
                   </Link>
                 </div>

@@ -33,10 +33,6 @@ const sidebar = () => {
     },
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className={styles.sidebar_container}>
       <div className={styles.sidebar}>

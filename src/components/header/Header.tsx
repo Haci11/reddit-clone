@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { Session } from "../../types/Interfaces";
 import styles from "./Header.module.scss";
 
@@ -10,7 +11,10 @@ const Header = () => {
   if (!session)
     return (
       <nav className={styles.nav}>
-        <div>reddit_clone</div>
+        <Link href="/" className={styles.nav_title}>
+          reddit_clone{" "}
+        </Link>
+
         <div className={styles.github}>
           <button className={styles.github__btn} onClick={() => signIn()}>
             Login
@@ -21,7 +25,9 @@ const Header = () => {
 
   return (
     <nav className={styles.nav}>
-      <div>reddit_clone</div>
+      <Link href="/" className={styles.nav_title}>
+        reddit_clone
+      </Link>
       <div className={styles.github}>
         <img
           src={session?.user.image}

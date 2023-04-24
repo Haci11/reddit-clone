@@ -12,6 +12,10 @@
   position: sticky;
   top: 0px;
   z-index: 1;
+
+  &_title {
+    color: $white;
+  }
   .github {
     display: flex;
     align-items: center;

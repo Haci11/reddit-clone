@@ -2,6 +2,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { Session } from "../../types/Interfaces";
 import styles from "./Header.module.scss";
+import Logo from "../../assets/redditlogoo.png";
+import Image from "next/image";
 
 const Header = () => {
   const { data: session }: { data: Session } = useSession() as {
@@ -12,7 +14,7 @@ const Header = () => {
     return (
       <nav className={styles.nav}>
         <Link href="/" className={styles.nav_title}>
-          reddit_clone{" "}
+          <Image src={Logo} alt="aa" /> Reddit-Clone
         </Link>
 
         <div className={styles.github}>
@@ -26,7 +28,7 @@ const Header = () => {
   return (
     <nav className={styles.nav}>
       <Link href="/" className={styles.nav_title}>
-        reddit_clone
+        <Image src={Logo} alt="aa" />
       </Link>
       <div className={styles.github}>
         <img

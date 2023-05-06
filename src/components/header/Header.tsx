@@ -31,14 +31,14 @@ const Header = () => {
         <Image src={Logo} alt="aa" />
       </Link>
       <div className={styles.github}>
-        <img
-          src={session?.user.image}
-          className={styles.github__img}
-          alt="Github Profile"
-        />
-        <h1 className={styles.github__name}> {session?.user.name}</h1>
         <div className={styles.dropdown}>
           <button className={styles.dropbtn}>
+            <img
+              src={session?.user.image}
+              className={styles.github__img}
+              alt="Github Profile"
+            />
+            <h1 className={styles.github__name}> {session?.user.name}</h1>
             Meny <i className="fa fa-caret-down"></i>
           </button>
           <div className={styles.dropdown_content}>

@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <nav className={styles.nav}>
       <Link href="/" className={styles.nav_title}>
-        <Image src={Logo} alt="aa" />
+        <Image src={Logo} alt="aa" /> Reddit-Clone
       </Link>
       <div className={styles.github}>
         <div className={styles.dropdown}>

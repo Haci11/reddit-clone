@@ -4,7 +4,7 @@ import { Session } from "../../types/Interfaces";
 import styles from "./Header.module.scss";
 import Logo from "../../assets/redditlogoo.png";
 import Image from "next/image";
-
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 const Header = () => {
   const { data: session }: { data: Session } = useSession() as {
     data: Session;
@@ -33,13 +33,15 @@ const Header = () => {
       <div className={styles.github}>
         <div className={styles.dropdown}>
           <button className={styles.dropbtn}>
-            <img
-              src={session?.user.image}
-              className={styles.github__img}
-              alt="Github Profile"
-            />
-            <h1 className={styles.github__name}> {session?.user.name}</h1>
-            Meny <i className="fa fa-caret-down"></i>
+            <div className={styles.dropinfo}>
+              <img
+                src={session?.user.image}
+                className={styles.github__img}
+                alt="Github Profile"
+              />
+              <h3 className={styles.github__name}> {session?.user.name}</h3>
+            </div>
+            <MdOutlineKeyboardArrowDown />
           </button>
           <div className={styles.dropdown_content}>
             <a onClick={() => signOut()}>Log Out</a>

@@ -28,7 +28,11 @@
     display: flex;
     align-items: center;
     gap: 8px;
-
+    &__name {
+      @media screen and (max-width: 500px) {
+        display: none;
+      }
+    }
     &__img {
       width: 30px;
       height: 30px;
@@ -59,6 +63,7 @@
       background-color: inherit;
       font-family: inherit;
       margin: 0;
+
       h3 {
         font-size: 16px;
       }
@@ -81,17 +86,14 @@
       display: none;
       position: absolute;
       background-color: #f9f9f9;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      z-index: 1;
     }
 
     .dropdown_content a {
       float: none;
       color: black;
-      padding: 12px 16px;
+      padding: 0.5rem;
       text-decoration: none;
       display: block;
-      text-align: left;
     }
 
     .dropdown_content a:hover {

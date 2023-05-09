@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { formatTimeAgo } from "../components/utils/formatTimeAgo";
 import styles from "../styles/Home.module.scss";
 import type { Session, Subreddit } from "../types/Interfaces";
+import { TbMessageCircle2 } from "react-icons/tb";
 
 const Id = () => {
   const { data: session }: { data: Session } = useSession() as {
@@ -77,7 +78,7 @@ const Id = () => {
                       <p>{post.body}</p>
                     </div>
                     <div className={styles.comment}>
-                      {post.Comment.length} Comments
+                      <TbMessageCircle2 /> <p>{post.Comment.length}</p>
                     </div>
                   </Link>
                 </div>

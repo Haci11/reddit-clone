@@ -24,8 +24,17 @@
     word-break: break-all;
 
     .comment {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       margin-top: 1rem;
       color: $white;
+      svg {
+        font-size: 1rem;
+      }
+      p {
+        font-size: 0.8rem;
+      }
     }
   }
   .header {

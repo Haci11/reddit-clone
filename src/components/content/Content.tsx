@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Post } from "../../types/Interfaces";
 import { formatTimeAgo } from "../utils/formatTimeAgo";
 import styles from "./Content.module.scss";
-
+import { TbMessageCircle2 } from "react-icons/tb";
 const Content: React.FC = () => {
   const { data, isLoading } = useQuery<Post[]>({
     queryKey: ["allposts"],
@@ -37,7 +37,7 @@ const Content: React.FC = () => {
                   <p>{data.body}</p>
                 </div>
                 <div className={styles.comment}>
-                  {data.Comment.length} Comments
+                  <TbMessageCircle2 /> <p>{data.Comment.length}</p>
                 </div>
               </Link>
             </div>
